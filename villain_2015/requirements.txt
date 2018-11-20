@@ -1,0 +1,5 @@
+numpy==1.15.0
+pandas==0.23.3
+-e git+https://github.com/kids-first/kf-lib-data-ingest.git#egg=kf-lib-data-ingest
+-e git+https://github.com/kids-first/kf-model-omop.git#egg=kf-model-omop
+-e git+https://github.research.chop.edu/devops/aws-auth-cli#egg=chopaws
