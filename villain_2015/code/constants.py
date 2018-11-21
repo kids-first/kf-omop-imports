@@ -4,6 +4,16 @@ OMOP Constants
 
 
 class CONCEPT:
+    class SPECIMEN:
+        class ANATOMIC_SITE:
+            pass
+
+        class COMPOSITION:
+            BLOOD = 4001225
+
+        class TYPE:
+            TUMOR = 4122248
+
     class COMMON:
         NO_MATCH = 0
 

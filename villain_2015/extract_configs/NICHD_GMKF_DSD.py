@@ -32,6 +32,21 @@ operations = [
         in_col='submitted_subject_id_s',
         out_col=OMOP.PERSON.SOURCE_VALUE
     ),
+    # person external_id
+    keep_map(
+        in_col='submitted_subject_id_s',
+        out_col=OMOP.PERSON.ID
+    ),
+    # specimen source value
+    keep_map(
+        in_col='biospecimen_repository_sample_id_s',
+        out_col=OMOP.SPECIMEN.ID
+    ),
+    # specimen datetime
+    keep_map(
+        in_col='LoadDate_s',
+        out_col=OMOP.SPECIMEN.DATETIME
+    ),
     # gender source value
     value_map(
         in_col="sex_s",

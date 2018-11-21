@@ -20,9 +20,17 @@ class OMOP:
     class PERSON(OmopMixin):
         pass
 
-    class SPECIMAN(OmopMixin):
-        SPECIMAN_TYPE = None
-        SPECIMAN_TYPE_CONCEPT_ID = None
+    class SPECIMEN(OmopMixin):
+        class DISEASE_STATUS(OmopMixin):
+            pass
+
+        class ANATOMIC_SITE(OmopMixin):
+            pass
+
+        class TYPE(OmopMixin):
+            pass
+
+        DATETIME = None
 
     class ETHNICITY(OmopMixin):
         pass

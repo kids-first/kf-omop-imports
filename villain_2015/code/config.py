@@ -55,8 +55,3 @@ def _make_omop_schema():
         omop_schema[cls.__name__] = d
 
     return omop_schema
-
-
-from pprint import pprint
-from kf_lib_data_ingest.common.misc import write_json
-write_json(_make_omop_schema(), 'schema.json')

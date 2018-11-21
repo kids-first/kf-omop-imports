@@ -480,7 +480,7 @@ schema = {
     },
     "Speciman": {
         "_links": {
-            "person_id": None,
+            "person_id": OMOP.PERSON.ID,
             "specimen_concept_id": OMOP.SPECIMEN.CONCEPT_ID,
             "anatomic_site_concept_id": OMOP.SPECIMEN.ANATOMIC_SITE.CONCEPT_ID,
             "disease_status_concept_id": OMOP.SPECIMEN.DISEASE_STATUS.CONCEPT_ID,
