@@ -1,5 +1,6 @@
 import os
 import inspect
+from sqlalchemy.inspection import inspect as sqlainspect
 from sqlalchemy.orm import (
     class_mapper,
     ColumnProperty
@@ -10,9 +11,10 @@ from kf_model_omop.model import models
 STUDY_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_DIR = os.path.join(STUDY_DIR, 'output')
 CONFIG_DIR = os.path.join(STUDY_DIR, 'extract_configs')
+ID_CACHE_FILE = os.path.join(STUDY_DIR, 'id_cache.json')
 
 
-def get_live_classes(module, full_module_name):
+def _get_live_classes(module, full_module_name):
     """
     Return list of classes that are defined in the python module
 
@@ -39,13 +41,22 @@ def _make_omop_schema():
         }
     """
     omop_schema = {}
-    classes = get_live_classes(models, 'kf_model_omop.model.models')
+    classes = _get_live_classes(models, 'kf_model_omop.model.models')
     for cls in classes:
-        mapper = class_mapper(cls)
-        d = dict()
-        for prop in mapper.iterate_properties:
-            if isinstance(prop, ColumnProperty):
-                d[prop.key] = None
+        d = {'_links': {},
+             '_primary_key': {}}
+        for c in sqlainspect(cls).columns:
+            if c.foreign_keys and (not c.primary_key):
+                d['_links'][c.name] = None
+            elif c.primary_key:
+                d['_primary_key'][c.name] = None
+            else:
+                d[c.name] = None
         omop_schema[cls.__name__] = d
 
     return omop_schema
+
+
+from pprint import pprint
+from kf_lib_data_ingest.common.misc import write_json
+write_json(_make_omop_schema(), 'schema.json')
