@@ -26,6 +26,14 @@ concept_id | concept_name | domain_id |vocabulary_id | concept_class_id | standa
     Example: person table has gender_concept_id and gender_source_concept_id, but
     specimen table has anatomic_site_concept_id but not anatomic_site_source_concept_id
 
-
-
 - **year\_of\_birth**
+    - Should not be required since this data is not always available
+
+### Naming of Common Table Attributes
+
+- Common table attributes should be named uniformly and without a table name prefix. For example the column `person_source_value`
+should just be `source_value`. Similarly, `specimen_source_value` should just be `source_value`. Table name prefixes on these columns make it harder to automate data ingest.
+
+- Primary key columns should also be named uniformly and not depend on table name (i.e. person_id should be something like kf_id, omop_id, etc)
+
+### Longitudinal Aspect
