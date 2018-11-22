@@ -23,7 +23,7 @@ def main():
     data_dict = extract.run(OUTPUT_DIR, extract_configs)
 
     # Transform
-    df_dict = transform.run(data_dict)
+    df_dict = transform.run(OUTPUT_DIR, data_dict)
 
     # Load
     load.run(df_dict)

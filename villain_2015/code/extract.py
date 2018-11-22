@@ -1,11 +1,15 @@
 import os
-from pprint import pprint
 
 from kf_lib_data_ingest.etl.extract.extract import ExtractStage
 
 
 def run(output_dir, extract_configs):
-    # Run extract
+    # Make output dir
+    output_dir = os.path.join(output_dir, 'extract')
+    if not os.path.isdir(output_dir):
+        os.mkdir(output_dir)
+
+    # Run
     es = ExtractStage(output_dir, extract_configs)
     df_out = es.run()
 
