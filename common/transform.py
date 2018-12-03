@@ -1,10 +1,6 @@
 import os
 import logging
 
-
-from common.concept_schema import OMOP
-from common.utils import merge_without_duplicates
-
 logger = logging.getLogger(__name__)
 
 
@@ -23,7 +19,22 @@ def write_output(output_dir, df_out):
         df.to_csv(fp, sep='\t')
 
 
-def run(output_dir, data_dict):
+def run(output_dir, data_dict, transform_func):
+    """
+    Transform mapped data tables into merged dataframes, one df for each
+    target entity type. transform_func must return a dict where keys are names
+    of OMOP SQLAlchemy models:
+
+        df_out = {
+            'Person': person_df,
+            'Speciman': specimen_df
+        }
+
+    :param output_dir: Study directory's output dir
+    :param data_dict: Dict of mapped dfs from extract stage
+    :transform_funct: function pointer to a method that merges dfs from
+    data_dict into the form described above.
+    """
     logger.info('BEGIN TransformStage')
 
     # Reorganize data - Dict (key=filename, value=df)
@@ -32,19 +43,7 @@ def run(output_dir, data_dict):
            }
 
     # Make dataframes
-    # Person
-    persons = dfs['NICHD_GMKF_DSD']
-
-    # Specimens
-    specimens = dfs['3a_sample_attributes']
-    specimens = merge_without_duplicates(persons, specimens,
-                                         on=OMOP.SPECIMEN.ID)
-    specimens = specimens.drop_duplicates(OMOP.SPECIMEN.ID)
-
-    df_out = {
-        'Person': persons,
-        'Speciman': specimens
-    }
+    df_out = transform_func(dfs)
 
     write_output(output_dir, df_out)
 
