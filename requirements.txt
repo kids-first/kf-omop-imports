@@ -1,3 +1,4 @@
+click==7.0
 numpy==1.15.0
 pandas==0.23.3
 -e git+https://github.com/kids-first/kf-lib-data-ingest.git#egg=kf-lib-data-ingest
