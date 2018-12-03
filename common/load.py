@@ -120,39 +120,29 @@ def load(session, df_dict, id_cache):
                                                        result,
                                                        id_cache)
 
-            logger.info(f'\t{i} of {total} {model_cls_name}: '
-                        f'\n{pformat(result)}')
-
-            # Update model instance
-            if primary_key_value:
-                instance = session.query(model_cls).get(primary_key_value)
-                if instance:
-                    for property, value in result.items():
-                        setattr(instance, property, value)
+            # Create or update model instance
+            instance = session.query(model_cls).get(primary_key_value)
+            if instance:
+                operation = 'Updated'
+                for property, value in result.items():
+                    setattr(instance, property, value)
                 session.flush()
-            # Insert model instance
             else:
+                operation = 'Created'
+                # Reuse previously generated primary keys
+                if primary_key_value:
+                    result[primary_key] = primary_key_value
                 instance = model_cls(**result)
                 session.add(instance)
                 session.flush()
-                primary_key_value = getattr(instance, primary_key)
 
                 # Update id cache
+                primary_key_value = getattr(instance, primary_key)
                 id_cache[model_cls_name][source_id] = primary_key_value
 
-        session.commit()
+            logger.info(f'\t{operation} {i} of {total} {model_cls_name}: '
+                        f'\n{pformat(result)}')
 
-
-def delete_all(session, df_dict):
-    """
-    Delete all instances of models in df_dict's keys
-    """
-    logger.info('Deleting all previously loaded OMOP instances')
-    for model_cls in df_dict.keys():
-        results = session.query(model_cls).all()
-        logger.info(f'{len(results)} {model_cls.__name__} deleted')
-        for r in results:
-            session.delete(r)
         session.commit()
 
 
@@ -169,7 +159,6 @@ def run(df_dict, id_cache_filepath):
 
     # Use the context managed session to interact with DB
     with scoped_session() as session:
-        # delete_all(session, df_dict)
         load(session, df_dict, id_cache)
 
     # Write id cache
