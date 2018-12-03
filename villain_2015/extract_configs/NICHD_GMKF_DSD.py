@@ -6,8 +6,8 @@ from kf_lib_data_ingest.etl.extract.operations import (
     constant_map
 )
 from kf_lib_data_ingest.common import constants as kf_constants
-import constants as omop_constants
-from concept_schema import OMOP
+from common import constants as omop_constants
+from common.concept_schema import OMOP
 
 source_data_url = (
     'file://~/Projects/kids_first/data/Vilain_2015/dbgap/NICHD_GMKF_DSD.xlsx'

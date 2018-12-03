@@ -3,9 +3,9 @@ import os
 from kf_lib_data_ingest.etl.configuration.log import setup_logger
 
 from config import CONFIG_DIR, OUTPUT_DIR
-import extract
-import transform
-import load
+from common import extract
+from common import transform
+from common import load
 
 
 def main():
