@@ -2,8 +2,8 @@ import os
 import logging
 
 
-from concept_schema import OMOP
-from utils import merge_without_duplicates
+from common.concept_schema import OMOP
+from common.utils import merge_without_duplicates
 
 logger = logging.getLogger(__name__)
 

@@ -11,7 +11,7 @@ from kf_model_omop.factory import scoped_session
 from kf_model_omop.model import models
 
 from config import ID_CACHE_FILE
-from target_api_config import schema
+from common.target_api_config import schema
 
 logger = logging.getLogger(__name__)
 

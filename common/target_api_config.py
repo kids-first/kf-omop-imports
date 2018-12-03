@@ -4,7 +4,7 @@
 OMOP Target Model config
 """
 
-from concept_schema import OMOP
+from common.concept_schema import OMOP
 
 
 schema = {
