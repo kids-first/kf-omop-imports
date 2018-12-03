@@ -10,7 +10,6 @@ from kf_lib_data_ingest.common.misc import read_json, write_json
 from kf_model_omop.factory import scoped_session
 from kf_model_omop.model import models
 
-from config import ID_CACHE_FILE
 from common.target_api_config import schema
 
 logger = logging.getLogger(__name__)
@@ -157,7 +156,7 @@ def delete_all(session, df_dict):
         session.commit()
 
 
-def run(df_dict):
+def run(df_dict, id_cache_filepath):
     """
     Entry point into the loader
     """
@@ -165,8 +164,8 @@ def run(df_dict):
 
     # Read id cache
     id_cache = {}
-    if os.path.isfile(ID_CACHE_FILE):
-        id_cache = read_json(ID_CACHE_FILE)
+    if os.path.isfile(id_cache_filepath):
+        id_cache = read_json(id_cache_filepath)
 
     # Use the context managed session to interact with DB
     with scoped_session() as session:
@@ -174,6 +173,6 @@ def run(df_dict):
         load(session, df_dict, id_cache)
 
     # Write id cache
-    write_json(id_cache, ID_CACHE_FILE)
+    write_json(id_cache, id_cache_filepath)
 
     logger.info('END LoadStage ...')
