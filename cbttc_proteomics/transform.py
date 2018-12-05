@@ -9,15 +9,19 @@ def transform(dfs):
     persons = dfs['person']
 
     # Specimens
-    # TODO
+    specimens = dfs['specimen']
 
     # Diagnoses - condition occurrence
     diagnoses = dfs['diagnosis']
 
+    # Outcomes
+    outcomes = dfs['outcome']
+
     df_out = {
         'Person': persons,
-        'ConditionOccurrence': diagnoses
-        # 'Speciman': specimens
+        'ConditionOccurrence': diagnoses,
+        'Speciman': specimens,
+        'Observation': outcomes
     }
 
     return df_out
