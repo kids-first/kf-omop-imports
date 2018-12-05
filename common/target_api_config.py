@@ -79,24 +79,24 @@ schema = {
     },
     "ConditionOccurrence": {
         "_links": {
-            "condition_concept_id": None,
-            "condition_source_concept_id": None,
-            "condition_status_concept_id": None,
-            "condition_type_concept_id": None,
-            "person_id": None,
+            "condition_concept_id": OMOP.CONDITION.CONCEPT_ID,
+            "condition_source_concept_id": OMOP.CONDITION.SOURCE_CONCEPT_ID,
+            "condition_status_concept_id": OMOP.CONDITION.STATUS.CONCEPT_ID,
+            "condition_type_concept_id": OMOP.CONDITION.TYPE.CONCEPT_ID,
+            "person_id": OMOP.PERSON.ID,
             "provider_id": None,
             "visit_detail_id": None,
             "visit_occurrence_id": None
         },
         "_primary_key": {
-            "condition_occurrence_id": None
+            "condition_occurrence_id": OMOP.CONDITION.ID
         },
         "condition_end_date": None,
         "condition_end_datetime": None,
-        "condition_source_value": None,
+        "condition_source_value": OMOP.CONDITION.SOURCE_VALUE,
         "condition_start_date": None,
-        "condition_start_datetime": None,
-        "condition_status_source_value": None,
+        "condition_start_datetime": OMOP.CONDITION.DATETIME,
+        "condition_status_source_value": OMOP.CONDITION.STATUS.SOURCE_VALUE,
         "stop_reason": None
     },
     "Cost": {

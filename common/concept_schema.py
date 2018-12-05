@@ -20,6 +20,15 @@ class OMOP:
     class PERSON(OmopMixin):
         pass
 
+    class CONDITION(OmopMixin):
+        DATETIME = None
+
+        class STATUS(OmopMixin):
+            pass
+
+        class TYPE(OmopMixin):
+            pass
+
     class SPECIMEN(OmopMixin):
         class DISEASE_STATUS(OmopMixin):
             pass
