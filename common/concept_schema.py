@@ -20,6 +20,15 @@ class OMOP:
     class PERSON(OmopMixin):
         pass
 
+    class OBSERVATION(OmopMixin):
+        class EVENT_FIELD(OmopMixin):
+            pass
+
+        class TYPE(OmopMixin):
+            pass
+
+        DATETIME = None
+
     class CONDITION(OmopMixin):
         DATETIME = None
 

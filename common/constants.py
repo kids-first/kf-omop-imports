@@ -13,13 +13,31 @@ class CONCEPT:
     class SPECIMEN:
 
         class ANATOMIC_SITE:
-            pass
+            BRAIN_STEM_PART = 4001043
+
+            class SPINAL_CORD:
+                THORACIC = 4176257
+                CERVICAL = 4183411
+                LUMBAR = 4244556
 
         class COMPOSITION:
             BLOOD = 4001225
+            BRAIN_TISSUE = 4134448
+
+        class ANALYTE:
+            RNA = 4103715
+            DNA = 0
 
         class TYPE:
             TUMOR = 4122248
+
+    class OUTCOME:
+        class VITAL_STATUS:
+            DECEASED = 9176
+
+    class DISEASE_STATUS:
+        ABNORMAL = 4135493
+        NORMAL = 4069590
 
     class COMMON:
         NO_MATCH = 0

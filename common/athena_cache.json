@@ -1,0 +1,292 @@
+{
+    "Alive":{
+        "className":"Clinical Finding",
+        "code":"438949009",
+        "domain":"Condition",
+        "id":4230556,
+        "invalidReason":"Valid",
+        "name":"Alive",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Atypical Teratoid Rhabdoid Tumor":{
+        "className":"ICDO Condition",
+        "code":"9508/3-C71.9",
+        "domain":"Condition",
+        "id":44502658,
+        "invalidReason":"Valid",
+        "name":"Atypical teratoid/rhabdoid tumor of brain",
+        "standardConcept":"Standard",
+        "vocabulary":"ICDO3"
+    },
+    "Basal Ganglia":{
+        "className":"Clinical Finding",
+        "code":"195165005",
+        "domain":"Condition",
+        "id":4112018,
+        "invalidReason":"Valid",
+        "name":"Basal ganglia hemorrhage",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Cerebellum":{
+        "className":"Procedure",
+        "code":"171451000",
+        "domain":"Procedure",
+        "id":4062865,
+        "invalidReason":"Valid",
+        "name":"Excision of lesion of cerebellum",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Craniopharyngioma":{
+        "className":"Clinical Finding",
+        "code":"189179009",
+        "domain":"Condition",
+        "id":4099351,
+        "invalidReason":"Valid",
+        "name":"Craniopharyngioma",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Deceased":{
+        "className":"Procedure",
+        "code":"432646007",
+        "domain":"Observation",
+        "id":4201346,
+        "invalidReason":"Valid",
+        "name":"Care of deceased patient",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Dysembryoplastic neuroepithelial tumor":{
+        "className":"Diagnosis",
+        "code":"161123",
+        "domain":"Condition",
+        "id":45929952,
+        "invalidReason":"Valid",
+        "name":"Dysembryoplastic neuroepithelial tumor",
+        "standardConcept":"Non-standard",
+        "vocabulary":"CIEL"
+    },
+    "Dysplasia":{
+        "className":"Clinical Finding",
+        "code":"399382009",
+        "domain":"Condition",
+        "id":4161430,
+        "invalidReason":"Valid",
+        "name":"Dysplasia of vulva",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Ependymoma":{
+        "className":"Clinical Finding",
+        "code":"443643007",
+        "domain":"Condition",
+        "id":40482745,
+        "invalidReason":"Valid",
+        "name":"Ependymoma",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Frontal Lobe":{
+        "className":"Procedure",
+        "code":"312740003",
+        "domain":"Procedure",
+        "id":4195822,
+        "invalidReason":"Valid",
+        "name":"Frontal lobe biopsy",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Ganglioglioma":{
+        "className":"Main Heading",
+        "code":"D018303",
+        "domain":"Condition",
+        "id":28559,
+        "invalidReason":"Valid",
+        "name":"Ganglioglioma",
+        "standardConcept":"Non-standard",
+        "vocabulary":"MeSH"
+    },
+    "High-grade glioma":{
+        "className":"Finding",
+        "code":"160941",
+        "domain":"Condition",
+        "id":45949718,
+        "invalidReason":"Valid",
+        "name":"High-grade glioma",
+        "standardConcept":"Non-standard",
+        "vocabulary":"CIEL"
+    },
+    "Low-grade glioma":{
+        "className":"Finding",
+        "code":"160940",
+        "domain":"Condition",
+        "id":45934702,
+        "invalidReason":"Valid",
+        "name":"Low-grade glioma",
+        "standardConcept":"Non-standard",
+        "vocabulary":"CIEL"
+    },
+    "Medulloblastoma":{
+        "className":"Clinical Finding",
+        "code":"443333004",
+        "domain":"Condition",
+        "id":40481031,
+        "invalidReason":"Valid",
+        "name":"Medulloblastoma",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Occipital Lobe":{
+        "className":"Body Structure",
+        "code":"314148004",
+        "domain":"Spec Anatomic Site",
+        "id":4199177,
+        "invalidReason":"Valid",
+        "name":"Occipital lobe sulcus",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Optic Pathway":{
+        "className":"Clinical Finding",
+        "code":"212141007",
+        "domain":"Condition",
+        "id":255711,
+        "invalidReason":"Valid",
+        "name":"Optic nerve and pathway injury",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Parietal Lobe":{
+        "className":"Body Structure",
+        "code":"314145001",
+        "domain":"Spec Anatomic Site",
+        "id":4198268,
+        "invalidReason":"Valid",
+        "name":"Parietal lobe sulcus",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Schwannoma":{
+        "className":"Suppl Concept",
+        "code":"C536641",
+        "domain":"Condition",
+        "id":980167,
+        "invalidReason":"Valid",
+        "name":"Schwannomatosis",
+        "standardConcept":"Non-standard",
+        "vocabulary":"MeSH"
+    },
+    "Skull":{
+        "className":"Body Structure",
+        "code":"272681004",
+        "domain":"Spec Anatomic Site",
+        "id":4154334,
+        "invalidReason":"Valid",
+        "name":"Entire fontanel of skull",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Suprasellar":{
+        "className":"Diagnosis",
+        "code":"159006",
+        "domain":"Condition",
+        "id":45941463,
+        "invalidReason":"Valid",
+        "name":"suprasellar syndrome",
+        "standardConcept":"Non-standard",
+        "vocabulary":"CIEL"
+    },
+    "Temporal Lobe":{
+        "className":"Clinical Finding",
+        "code":"89498001",
+        "domain":"Condition",
+        "id":4232189,
+        "invalidReason":"Valid",
+        "name":"Temporal lobe aphasia",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Teratoma":{
+        "className":"Clinical Finding",
+        "code":"417234002",
+        "domain":"Condition",
+        "id":4213516,
+        "invalidReason":"Valid",
+        "name":"Benign sacral teratoma",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Thalamus":{
+        "className":"Procedure",
+        "code":"271319004",
+        "domain":"Measurement",
+        "id":4156939,
+        "invalidReason":"Valid",
+        "name":"Hormone radioassay - thalamus/hypothalamus",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "Ventricles":{
+        "className":"Procedure",
+        "code":"445419002",
+        "domain":"Procedure",
+        "id":40483388,
+        "invalidReason":"Valid",
+        "name":"MRI of cardiac ventricles",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "WHO Grade I":{
+        "className":"Clinical Finding",
+        "code":"396922003",
+        "domain":"Condition",
+        "id":4246266,
+        "invalidReason":"Valid",
+        "name":"WHO grade I",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "WHO Grade II":{
+        "className":"Clinical Finding",
+        "code":"396924002",
+        "domain":"Condition",
+        "id":4246267,
+        "invalidReason":"Valid",
+        "name":"WHO grade III",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "WHO Grade IV":{
+        "className":"Clinical Finding",
+        "code":"396925001",
+        "domain":"Condition",
+        "id":4287179,
+        "invalidReason":"Valid",
+        "name":"WHO grade IV",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "WHO grade I":{
+        "className":"Clinical Finding",
+        "code":"396922003",
+        "domain":"Condition",
+        "id":4246266,
+        "invalidReason":"Valid",
+        "name":"WHO grade I",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "WHO grade III":{
+        "className":"Clinical Finding",
+        "code":"396924002",
+        "domain":"Condition",
+        "id":4246267,
+        "invalidReason":"Valid",
+        "name":"WHO grade III",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    }
+}

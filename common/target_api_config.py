@@ -324,25 +324,25 @@ schema = {
     },
     "Observation": {
         "_links": {
-            "observation_concept_id": None,
-            "observation_source_concept_id": None,
-            "observation_type_concept_id": None,
-            "person_id": None,
+            "observation_concept_id": OMOP.OBSERVATION.CONCEPT_ID,
+            "observation_source_concept_id": OMOP.OBSERVATION.SOURCE_CONCEPT_ID,
+            "observation_type_concept_id": OMOP.OBSERVATION.TYPE.CONCEPT_ID,
+            "person_id": OMOP.PERSON.ID,
             "provider_id": None,
             "qualifier_concept_id": None,
             "unit_concept_id": None,
             "value_as_concept_id": None,
             "visit_detail_id": None,
-            "visit_occurrence_id": None
+            "visit_occurrence_id": None,
+            "obs_event_field_concept_id": OMOP.OBSERVATION.EVENT_FIELD.CONCEPT_ID,
         },
         "_primary_key": {
-            "observation_id": None
+            "observation_id": OMOP.OBSERVATION.ID
         },
-        "obs_event_field_concept_id": None,
         "observation_date": None,
-        "observation_datetime": None,
+        "observation_datetime": OMOP.OBSERVATION.DATETIME,
         "observation_event_id": None,
-        "observation_source_value": None,
+        "observation_source_value": OMOP.OBSERVATION.SOURCE_VALUE,
         "qualifier_source_value": None,
         "unit_source_value": None,
         "value_as_datetime": None,
