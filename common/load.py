@@ -119,9 +119,15 @@ def load(session, df_dict, id_cache):
              primary_key_value) = _resolve_primary_key(model_cls_name,
                                                        result,
                                                        id_cache)
+            logger.debug(f'\tAttempt load {i} of {total} {model_cls_name}: '
+                         f'\n{pformat(result)}')
+            logger.debug(f'{source_id} has pk {primary_key} = {primary_key_value}')
 
             # Create or update model instance
-            instance = session.query(model_cls).get(primary_key_value)
+            instance = None
+            if primary_key_value:
+                instance = session.query(model_cls).get(primary_key_value)
+
             if instance:
                 operation = 'Updated'
                 for property, value in result.items():
