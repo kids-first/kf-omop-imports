@@ -79,24 +79,24 @@ schema = {
     },
     "ConditionOccurrence": {
         "_links": {
-            "condition_concept_id": None,
-            "condition_source_concept_id": None,
-            "condition_status_concept_id": None,
-            "condition_type_concept_id": None,
-            "person_id": None,
+            "condition_concept_id": OMOP.CONDITION.CONCEPT_ID,
+            "condition_source_concept_id": OMOP.CONDITION.SOURCE_CONCEPT_ID,
+            "condition_status_concept_id": OMOP.CONDITION.STATUS.CONCEPT_ID,
+            "condition_type_concept_id": OMOP.CONDITION.TYPE.CONCEPT_ID,
+            "person_id": OMOP.PERSON.ID,
             "provider_id": None,
             "visit_detail_id": None,
             "visit_occurrence_id": None
         },
         "_primary_key": {
-            "condition_occurrence_id": None
+            "condition_occurrence_id": OMOP.CONDITION.ID
         },
         "condition_end_date": None,
         "condition_end_datetime": None,
-        "condition_source_value": None,
+        "condition_source_value": OMOP.CONDITION.SOURCE_VALUE,
         "condition_start_date": None,
-        "condition_start_datetime": None,
-        "condition_status_source_value": None,
+        "condition_start_datetime": OMOP.CONDITION.DATETIME,
+        "condition_status_source_value": OMOP.CONDITION.STATUS.SOURCE_VALUE,
         "stop_reason": None
     },
     "Cost": {
@@ -324,25 +324,25 @@ schema = {
     },
     "Observation": {
         "_links": {
-            "observation_concept_id": None,
-            "observation_source_concept_id": None,
-            "observation_type_concept_id": None,
-            "person_id": None,
+            "observation_concept_id": OMOP.OBSERVATION.CONCEPT_ID,
+            "observation_source_concept_id": OMOP.OBSERVATION.SOURCE_CONCEPT_ID,
+            "observation_type_concept_id": OMOP.OBSERVATION.TYPE.CONCEPT_ID,
+            "person_id": OMOP.PERSON.ID,
             "provider_id": None,
             "qualifier_concept_id": None,
             "unit_concept_id": None,
             "value_as_concept_id": None,
             "visit_detail_id": None,
-            "visit_occurrence_id": None
+            "visit_occurrence_id": None,
+            "obs_event_field_concept_id": OMOP.OBSERVATION.EVENT_FIELD.CONCEPT_ID,
         },
         "_primary_key": {
-            "observation_id": None
+            "observation_id": OMOP.OBSERVATION.ID
         },
-        "obs_event_field_concept_id": None,
         "observation_date": None,
-        "observation_datetime": None,
+        "observation_datetime": OMOP.OBSERVATION.DATETIME,
         "observation_event_id": None,
-        "observation_source_value": None,
+        "observation_source_value": OMOP.OBSERVATION.SOURCE_VALUE,
         "qualifier_source_value": None,
         "unit_source_value": None,
         "value_as_datetime": None,
@@ -414,21 +414,21 @@ schema = {
     },
     "ProcedureOccurrence": {
         "_links": {
-            "modifier_concept_id": None,
-            "person_id": None,
-            "procedure_concept_id": None,
-            "procedure_source_concept_id": None,
-            "procedure_type_concept_id": None,
+            "modifier_concept_id": OMOP.PROCEDURE.MODIFIER.CONCEPT_ID,
+            "person_id": OMOP.PERSON.ID,
+            "procedure_concept_id": OMOP.PROCEDURE.CONCEPT_ID,
+            "procedure_source_concept_id": OMOP.PROCEDURE.SOURCE_CONCEPT_ID,
+            "procedure_type_concept_id": OMOP.PROCEDURE.TYPE.CONCEPT_ID,
             "provider_id": None,
             "visit_detail_id": None,
             "visit_occurrence_id": None
         },
         "_primary_key": {
-            "procedure_occurrence_id": None
+            "procedure_occurrence_id": OMOP.PROCEDURE.ID
         },
         "modifier_source_value": None,
         "procedure_date": None,
-        "procedure_datetime": None,
+        "procedure_datetime": OMOP.PROCEDURE.DATETIME,
         "procedure_source_value": None,
         "quantity": None
     },

@@ -15,8 +15,9 @@ from common.target_api_config import schema
 logger = logging.getLogger(__name__)
 
 id_model_map = {
-    'person_id': 'Person',
-    'specimen_id': 'Speciman'
+    list(model_schema['_primary_key'].keys())[0]: model_name
+    for model_name, model_schema in schema.items()
+    if model_schema['_primary_key']
 }
 
 
@@ -56,7 +57,7 @@ def _resolve_primary_key(model_name, params, id_cache):
     """
     for k, v in params['_primary_key'].items():
         primary_key = k
-        source_id = v
+        source_id = str(v)
         primary_key_value = id_cache[model_name].get(source_id)
 
     params.pop('_primary_key', None)
@@ -84,7 +85,7 @@ def _fill_values(target_schema, row):
     return params
 
 
-def load(session, df_dict, id_cache):
+def load(session, df_dict, id_cache, include_set):
     """
     Create instances of SQLAlchemy models populated with data from df_dict
     and update or insert them in the OMOP database
@@ -94,6 +95,9 @@ def load(session, df_dict, id_cache):
     :param id_cache: dict storing source ID to primary key mapping
     """
     for model_cls_name, df in df_dict.items():
+        if (include_set is not None) and model_cls_name not in include_set:
+            logging.info(f'Skipping loading of {model_cls_name}')
+            continue
         # Lookup model class by name
         model_cls = getattr(models, model_cls_name)
 
@@ -119,9 +123,15 @@ def load(session, df_dict, id_cache):
              primary_key_value) = _resolve_primary_key(model_cls_name,
                                                        result,
                                                        id_cache)
+            logger.debug(f'\tAttempt load {i} of {total} {model_cls_name}: '
+                         f'\n{pformat(result)}')
+            logger.debug(f'{source_id} has pk {primary_key} = {primary_key_value}')
 
             # Create or update model instance
-            instance = session.query(model_cls).get(primary_key_value)
+            instance = None
+            if primary_key_value:
+                instance = session.query(model_cls).get(primary_key_value)
+
             if instance:
                 operation = 'Updated'
                 for property, value in result.items():
@@ -146,7 +156,7 @@ def load(session, df_dict, id_cache):
         session.commit()
 
 
-def run(df_dict, id_cache_filepath):
+def run(df_dict, id_cache_filepath, include_set=None):
     """
     Entry point into the loader
     """
@@ -159,7 +169,7 @@ def run(df_dict, id_cache_filepath):
 
     # Use the context managed session to interact with DB
     with scoped_session() as session:
-        load(session, df_dict, id_cache)
+        load(session, df_dict, id_cache, include_set)
 
     # Write id cache
     write_json(id_cache, id_cache_filepath)

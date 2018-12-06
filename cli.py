@@ -21,8 +21,10 @@ def cli():
 @click.command(name='ingest')
 @click.argument('study_dir',
                 type=click.Path(file_okay=False, dir_okay=True))
+@click.option('--log_level', type=click.Choice(['debug', 'info',
+                                                'warning', 'error']))
 @time_it
-def ingest(study_dir):
+def ingest(study_dir, log_level):
     """
     Ingest a study into the Kids First OMOP db
 
@@ -34,7 +36,7 @@ def ingest(study_dir):
     from common import etl
 
     # Setup logging
-    output_dir = _setup_output_and_logging(study_dir)
+    output_dir = _setup_output_and_logging(study_dir, log_level)
 
     # Get transformer
     study_transform = import_module_from_file(os.path.join(
@@ -67,14 +69,22 @@ def drop(study_dir):
     delete.run(os.path.abspath(study_dir))
 
 
-def _setup_output_and_logging(study_dir):
+def _setup_output_and_logging(study_dir, log_level=None):
     # Create output directory for caching stage outputs
     output_dir = os.path.join(study_dir, 'output')
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
 
     # Logger
-    setup_logger(output_dir, overwrite_log=True)
+    kwargs = {
+        'overwrite_log': True
+    }
+    if log_level:
+        import logging
+        log_level = getattr(logging, log_level.upper())
+        kwargs.update({'log_level': log_level})
+
+    setup_logger(output_dir, **kwargs)
 
     return output_dir
 

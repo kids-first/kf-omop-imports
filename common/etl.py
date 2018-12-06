@@ -7,6 +7,8 @@ from common import load
 
 def run(study_dir, output_dir, transform_func):
 
+    include_set = None
+
     # Extract stage
     config_dir = os.path.join(study_dir, 'extract_configs')
     extract_configs = [os.path.join(config_dir, fname)
@@ -19,4 +21,4 @@ def run(study_dir, output_dir, transform_func):
 
     # Load
     id_cache_file = os.path.join(study_dir, 'id_cache.json')
-    load.run(df_dict, id_cache_file)
+    load.run(df_dict, id_cache_file, include_set=include_set)

@@ -11,10 +11,9 @@ from kf_model_omop.model import models
 
 logger = logging.getLogger(__name__)
 
-id_model_map = {
-    'person_id': 'Person',
-    'specimen_id': 'Speciman'
-}
+ordered_model_list = ['Person', 'Speciman', 'Observation',
+                      'ConditionOccurrence',
+                      'ProcedureOccurrence']
 
 
 def delete_all(session):
@@ -23,7 +22,7 @@ def delete_all(session):
     """
     logger.info('Deleting all previously loaded OMOP instances')
 
-    for model_cls_name in reversed(list(id_model_map.values())):
+    for model_cls_name in reversed(ordered_model_list):
         model_cls = getattr(models, model_cls_name)
         results = session.query(model_cls).all()
         logger.info(f'{len(results)} {model_cls.__name__} deleted')
@@ -36,7 +35,7 @@ def drop_study(session, id_cache):
     """
     Delete all study entities
     """
-    model_name_list = reversed(list(id_model_map.values()))
+    model_name_list = reversed(ordered_model_list)
 
     for model_cls_name in model_name_list:
         # Lookup model class by name

@@ -1,6 +1,7 @@
 import os
 
 from kf_lib_data_ingest.etl.extract.extract import ExtractStage
+from common.athena import athena_cache
 
 
 def run(output_dir, extract_configs):
@@ -18,5 +19,8 @@ def run(output_dir, extract_configs):
         fname = os.path.split(url)[1].split('.')[0]
         output_path = os.path.join(output_dir, (fname + '.tsv'))
         df.to_csv(output_path, sep='\t')
+
+    # Write athena cache to file
+    athena_cache.write_cache()
 
     return df_out
