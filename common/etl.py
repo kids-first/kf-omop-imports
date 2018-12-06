@@ -7,7 +7,7 @@ from common import load
 
 def run(study_dir, output_dir, transform_func):
 
-    include_set = {'Observation'}
+    include_set = None
 
     # Extract stage
     config_dir = os.path.join(study_dir, 'extract_configs')

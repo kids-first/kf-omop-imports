@@ -15,10 +15,9 @@ from common.target_api_config import schema
 logger = logging.getLogger(__name__)
 
 id_model_map = {
-    'person_id': 'Person',
-    'specimen_id': 'Speciman',
-    'condition_occurrence': 'ConditionOccurrence',
-    'observation_id': 'Observation'
+    list(model_schema['_primary_key'].keys())[0]: model_name
+    for model_name, model_schema in schema.items()
+    if model_schema['_primary_key']
 }
 
 
@@ -97,6 +96,7 @@ def load(session, df_dict, id_cache, include_set):
     """
     for model_cls_name, df in df_dict.items():
         if (include_set is not None) and model_cls_name not in include_set:
+            logging.info(f'Skipping loading of {model_cls_name}')
             continue
         # Lookup model class by name
         model_cls = getattr(models, model_cls_name)
