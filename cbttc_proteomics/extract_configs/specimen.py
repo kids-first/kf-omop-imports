@@ -89,7 +89,7 @@ operations = [
     ),
     # specimen type concept id
     constant_map(
-        m=omop_constants.CONCEPT.COMMON.NO_MATCH,
+        m=omop_constants.CONCEPT.COMMON.UNAVAILABLE,
         out_col=OMOP.SPECIMEN.TYPE.CONCEPT_ID
     ),
     # specimen anatomic concept id

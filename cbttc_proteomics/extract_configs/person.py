@@ -111,7 +111,7 @@ operations = [
     ),
     # race source concept id (why??)
     constant_map(
-        m=omop_constants.CONCEPT.COMMON.NO_MATCH,
+        m=omop_constants.CONCEPT.COMMON.UNAVAILABLE,
         out_col=OMOP.RACE.SOURCE_CONCEPT_ID
     ),
     # year of birth

@@ -74,17 +74,17 @@ operations = [
     ),
     # observation_type_concept_id
     constant_map(
-        m=omop_constants.CONCEPT.COMMON.NO_MATCH,
+        m=omop_constants.CONCEPT.COMMON.UNAVAILABLE,
         out_col=OMOP.OBSERVATION.TYPE.CONCEPT_ID
     ),
     # observation source concept id
     constant_map(
-        m=omop_constants.CONCEPT.COMMON.NO_MATCH,
+        m=omop_constants.CONCEPT.COMMON.UNAVAILABLE,
         out_col=OMOP.OBSERVATION.SOURCE_CONCEPT_ID
     ),
     # obs_event_field_concept_id ?? what on earth is this
     constant_map(
-        m=omop_constants.CONCEPT.COMMON.NO_MATCH,
+        m=omop_constants.CONCEPT.COMMON.UNAVAILABLE,
         out_col=OMOP.OBSERVATION.EVENT_FIELD.CONCEPT_ID
     )
 ]

@@ -73,7 +73,7 @@ operations = [
     ),
     # condition source concept id
     constant_map(
-        m=omop_constants.CONCEPT.COMMON.NO_MATCH,
+        m=omop_constants.CONCEPT.COMMON.UNAVAILABLE,
         out_col=OMOP.CONDITION.SOURCE_CONCEPT_ID
     ),
     # condition_start_datetime
@@ -87,7 +87,7 @@ operations = [
     # condition_type_concept_id
     value_map(
         in_col='grade',
-        m=lambda x: (omop_constants.CONCEPT.COMMON.NO_MATCH
+        m=lambda x: (omop_constants.CONCEPT.COMMON.UNAVAILABLE
                      if x.lower() == 'unavailable' else
                      int(athena_cache.lookup(x.split('/')[0]))
                      ),
