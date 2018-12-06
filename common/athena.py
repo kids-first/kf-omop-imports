@@ -74,7 +74,7 @@ class AthenaCache(object):
                 f'Could not find standard concept for {source_value}'
                 f' via Athena API {API_URL}')
 
-        return concept_id
+        return int(concept_id)
 
     def write_cache(self):
         """

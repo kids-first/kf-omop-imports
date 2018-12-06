@@ -15,19 +15,30 @@ class OmopMixin(PropertyMixin):
     CONCEPT_ID = None
 
 
+class TimeMixin():
+    START_DATETIME = None
+    STOP_DATETIME = None
+    DATETIME = None
+
+
 class OMOP:
 
     class PERSON(OmopMixin):
         pass
 
-    class OBSERVATION(OmopMixin):
+    class OBSERVATION(OmopMixin, TimeMixin):
         class EVENT_FIELD(OmopMixin):
             pass
 
         class TYPE(OmopMixin):
             pass
 
-        DATETIME = None
+    class PROCEDURE(OmopMixin, TimeMixin):
+        class MODIFIER(OmopMixin):
+            pass
+
+        class TYPE(OmopMixin):
+            pass
 
     class CONDITION(OmopMixin):
         DATETIME = None
@@ -38,7 +49,7 @@ class OMOP:
         class TYPE(OmopMixin):
             pass
 
-    class SPECIMEN(OmopMixin):
+    class SPECIMEN(OmopMixin, TimeMixin):
         class DISEASE_STATUS(OmopMixin):
             pass
 
@@ -47,8 +58,6 @@ class OMOP:
 
         class TYPE(OmopMixin):
             pass
-
-        DATETIME = None
 
     class ETHNICITY(OmopMixin):
         pass

@@ -41,6 +41,7 @@ class CONCEPT:
 
     class COMMON:
         NO_MATCH = 0
+        UNAVAILABLE = 45884388
 
     class GENDER:
         FEMALE = 8532

@@ -288,5 +288,45 @@
         "name":"WHO grade III",
         "standardConcept":"Standard",
         "vocabulary":"SNOMED"
+    },
+    "chemotherapy":{
+        "className":"Procedure",
+        "code":"399042005",
+        "domain":"Procedure",
+        "id":4163713,
+        "invalidReason":"Valid",
+        "name":"Chemotherapy cycle",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "photon radiation":{
+        "className":"ICD10PCS",
+        "code":"DB050ZZ",
+        "domain":"Procedure",
+        "id":2789748,
+        "invalidReason":"Valid",
+        "name":"Beam Radiation of Pleura using Photons <1 MeV",
+        "standardConcept":"Standard",
+        "vocabulary":"ICD10PCS"
+    },
+    "proton radiation":{
+        "className":"Physical Force",
+        "code":"82371002",
+        "domain":"Observation",
+        "id":4220683,
+        "invalidReason":"Valid",
+        "name":"Proton beam",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
+    },
+    "radiation":{
+        "className":"Clinical Finding",
+        "code":"370402009",
+        "domain":"Condition",
+        "id":4153517,
+        "invalidReason":"Valid",
+        "name":"Radiation sickness",
+        "standardConcept":"Standard",
+        "vocabulary":"SNOMED"
     }
 }

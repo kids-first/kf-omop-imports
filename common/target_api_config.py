@@ -414,21 +414,21 @@ schema = {
     },
     "ProcedureOccurrence": {
         "_links": {
-            "modifier_concept_id": None,
-            "person_id": None,
-            "procedure_concept_id": None,
-            "procedure_source_concept_id": None,
-            "procedure_type_concept_id": None,
+            "modifier_concept_id": OMOP.PROCEDURE.MODIFIER.CONCEPT_ID,
+            "person_id": OMOP.PERSON.ID,
+            "procedure_concept_id": OMOP.PROCEDURE.CONCEPT_ID,
+            "procedure_source_concept_id": OMOP.PROCEDURE.SOURCE_CONCEPT_ID,
+            "procedure_type_concept_id": OMOP.PROCEDURE.TYPE.CONCEPT_ID,
             "provider_id": None,
             "visit_detail_id": None,
             "visit_occurrence_id": None
         },
         "_primary_key": {
-            "procedure_occurrence_id": None
+            "procedure_occurrence_id": OMOP.PROCEDURE.ID
         },
         "modifier_source_value": None,
         "procedure_date": None,
-        "procedure_datetime": None,
+        "procedure_datetime": OMOP.PROCEDURE.DATETIME,
         "procedure_source_value": None,
         "quantity": None
     },
