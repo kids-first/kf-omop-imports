@@ -1,6 +1,4 @@
-
-from common.concept_schema import OMOP
-from common.utils import merge_without_duplicates
+import pandas as pd
 
 
 def transform(dfs):
@@ -17,11 +15,20 @@ def transform(dfs):
     # Outcomes
     outcomes = dfs['outcome']
 
+    # Radiations
+    radiations = dfs['radiation']
+
+    # Chemotherapies
+    chemos = dfs['chemotherapy']
+
+    procedure_occurs = pd.concat([radiations, chemos], ignore_index=True)
+
     df_out = {
         'Person': persons,
         'ConditionOccurrence': diagnoses,
         'Speciman': specimens,
-        'Observation': outcomes
+        'Observation': outcomes,
+        'ProcedureOccurrence': procedure_occurs
     }
 
     return df_out
