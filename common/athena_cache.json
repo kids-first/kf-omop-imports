@@ -9,6 +9,26 @@
         "standardConcept":"Standard",
         "vocabulary":"SNOMED"
     },
+    "American Indian or Alaska Native":{
+        "className":"Race",
+        "code":"1",
+        "domain":"Race",
+        "id":8657,
+        "invalidReason":"Valid",
+        "name":"American Indian or Alaska Native",
+        "standardConcept":"Standard",
+        "vocabulary":"Race"
+    },
+    "Asian":{
+        "className":"Race",
+        "code":"2",
+        "domain":"Race",
+        "id":8515,
+        "invalidReason":"Valid",
+        "name":"Asian",
+        "standardConcept":"Standard",
+        "vocabulary":"Race"
+    },
     "Atypical Teratoid Rhabdoid Tumor":{
         "className":"ICDO Condition",
         "code":"9508/3-C71.9",
@@ -28,6 +48,16 @@
         "name":"Basal ganglia hemorrhage",
         "standardConcept":"Standard",
         "vocabulary":"SNOMED"
+    },
+    "Black or African American":{
+        "className":"Race",
+        "code":"3",
+        "domain":"Race",
+        "id":8516,
+        "invalidReason":"Valid",
+        "name":"Black or African American",
+        "standardConcept":"Standard",
+        "vocabulary":"Race"
     },
     "Cerebellum":{
         "className":"Procedure",
@@ -119,6 +149,16 @@
         "standardConcept":"Non-standard",
         "vocabulary":"CIEL"
     },
+    "Hispanic or Latino":{
+        "className":"Ethnicity",
+        "code":"Hispanic",
+        "domain":"Ethnicity",
+        "id":38003563,
+        "invalidReason":"Valid",
+        "name":"Hispanic or Latino",
+        "standardConcept":"Standard",
+        "vocabulary":"Ethnicity"
+    },
     "Low-grade glioma":{
         "className":"Finding",
         "code":"160940",
@@ -138,6 +178,26 @@
         "name":"Medulloblastoma",
         "standardConcept":"Standard",
         "vocabulary":"SNOMED"
+    },
+    "Native Hawaiian or Other Pacific Islander":{
+        "className":"Race",
+        "code":"4",
+        "domain":"Race",
+        "id":8557,
+        "invalidReason":"Valid",
+        "name":"Native Hawaiian or Other Pacific Islander",
+        "standardConcept":"Standard",
+        "vocabulary":"Race"
+    },
+    "Not Hispanic or Latino":{
+        "className":"Ethnicity",
+        "code":"Not Hispanic",
+        "domain":"Ethnicity",
+        "id":38003564,
+        "invalidReason":"Valid",
+        "name":"Not Hispanic or Latino",
+        "standardConcept":"Standard",
+        "vocabulary":"Ethnicity"
     },
     "Occipital Lobe":{
         "className":"Body Structure",
@@ -289,6 +349,16 @@
         "standardConcept":"Standard",
         "vocabulary":"SNOMED"
     },
+    "White":{
+        "className":"Race",
+        "code":"5",
+        "domain":"Race",
+        "id":8527,
+        "invalidReason":"Valid",
+        "name":"White",
+        "standardConcept":"Standard",
+        "vocabulary":"Race"
+    },
     "chemotherapy":{
         "className":"Procedure",
         "code":"399042005",
@@ -298,6 +368,26 @@
         "name":"Chemotherapy cycle",
         "standardConcept":"Standard",
         "vocabulary":"SNOMED"
+    },
+    "female":{
+        "className":"Gender",
+        "code":"F",
+        "domain":"Gender",
+        "id":8532,
+        "invalidReason":"Valid",
+        "name":"FEMALE",
+        "standardConcept":"Standard",
+        "vocabulary":"Gender"
+    },
+    "male":{
+        "className":"Gender",
+        "code":"M",
+        "domain":"Gender",
+        "id":8507,
+        "invalidReason":"Valid",
+        "name":"MALE",
+        "standardConcept":"Standard",
+        "vocabulary":"Gender"
     },
     "photon radiation":{
         "className":"ICD10PCS",
