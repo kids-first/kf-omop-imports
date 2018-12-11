@@ -1,3 +1,4 @@
+
 # OMOP CDM / FHIR
 
 ## Goals
@@ -121,30 +122,29 @@ All three models - OMOP, FHIR and Kids First have a decent handle on modeling "t
 
 #### All events are observations. All observations are events.
 
-"I observed at time T that person P's [trait type] **cleft lip characteristic** status was True/False."
+"I observed at time T that person P's [characteristic] **cleft lip** status was True/False."
 
-	subject: P
-	type of thing: characteristic
-	thing being observed: cleft lip
-	observational value: True / False
+	who is being observed: e.g. P (or a group or a specimen)
+	time: T
+	type of observation: e.g. characteristic
+	what [characteristic] is being observed: e.g. cleft lip
+	observational value: e.g. True / False / 50.1
 
-"I observed at time T that person P's [procedure type] **nephrectomy surgery** status was True/False."
+"I observed at time T that person P's [procedure] **nephrectomy surgery** status was True/False."
 "I observed at time T that person P's [drug type] **drug D administration** was True/False."
-"I observed at time T that sample S's [trait type] **some kind of cancer characteristic** status was True/False."
-"I observed at time T that person P's [trait type] **oxygen level characteristic** status was 50.1."
+"I observed at time T that sample S's [characteristic] **some kind of cancer characteristic** status was True/False."
+"I observed at time T that person P's [characteristic] **oxygen level characteristic** status was 50.1."
 
-#### Ideas
+## Ideas
 
-* An event should be modeled as an occurrence that happens at a single point in time
+* An event occurs for a single thing at a single point in time without duration
 * Events can be implicitly related by time windows
-* Events can also be explicitly related by being part of **event groups**
+* Things and events can be put into groups
+* Things, groups, and events can be linked to each other by directed relationships
 
-All events should only have have 1 timestamp field to mark the single point in time when that event occurred.
-An event should never have both a start and and end timestamp. If you try to squish both the start and end time of something occurring you may lose important distinct information about the start event and the stop event of that something that happened. However, on the flip side, we still want to be able to link an end event with its corresponding start event so that we know these events are part of the same thing happening over a period of time.
+If you try to combine both the start and end time of something with non-zero duration into the same entity, relating information distinct to only one of those moments becomes more difficult. We still want to be able to link an end event with its corresponding start event so that we can treat these events as part of one event group happening across a period of time.
 
-We can use event groups to model multi-part processes or to model relationships (Treatment A was administered at time T0 specifically because Diagnosis A was observed at time T1).
-
-## Additional Nit Picks That Have a Big Impact
+## Additional Details That Have a Big Impact
 
 ### Missing, Unknown, or Negative Data
 
@@ -155,27 +155,17 @@ We can use event groups to model multi-part processes or to model relationships 
 
 The concept `Unavailable, concept_id = 45884388` is an OK general concept that can be used for any attribute in the source data that has no available value.
 
-concept_id | concept_name | domain_id |vocabulary_id | concept_class_id | standard_concept | concept_code | valid_start_date | valid_end_date | invalid_reason
------- | ------ | ------ |------ | ------ | ------ | ------ | ------ | ------ | ------
-45884388 | Unavailable | Meas Value | LOINC | Answer | Standard | LA7287-1 | 1970-01-01 | 2014-07-31
-
 #### Bad - Multiple concepts for unavailable
 
-There should probably just be one set of values to represent unknown or missing data. These values should be able to apply to any concept regardless of domain, class, etc.
+There should probably just be one set of values to represent unknown or missing data which apply to any concept regardless of domain, class, etc.
 
-Some OMOP concepts have their own particular concept for `Unavailable` that can be used to report data that is does not exist in the source data. I think this makes things more confusing.
-
-For example when mapping for gender, you could map to OMOP standard concept 8551, which is:
-
-concept_id | concept_name | domain_id |vocabulary_id | concept_class_id | standard_concept | concept_code | valid_start_date | valid_end_date | invalid_reason
------- | ------ | ------ |------ | ------ | ------ | ------ | ------ | ------ | ------
-8551 | UNKNOWN | Gender | Gender | Gender | S | M | 1970-01-01 | 2014-07-31
-
-But which do you choose, the more general `Unavailable, concept_id = 45884388` or the gender specific one, `Unavailable, concept_id = 8551`?
+OMOP has, for instance, a specific code for unknown gender (`8551`) instead of using the same code for unknown data everywhere. This seems like a mistake.
 
 #### Bad - No set of common concepts for "Negatives"
 
 In addition to Unavailable, there should be a set of concepts for other "negatives" like: Not Applicable, Reported Unknown, Not Allowed to Report etc. We should be able to use these for any concept, regardless of which domain, concept class, or vocabulary the concept belongs to. These are important distinctions from Unavailable, and we want to capture them.
+
+NCIT has codes for missing value reason, but the OMOP vocabulary doesn't include NCIT. Better to not rely on some ontology for these things anyway.
 
 ### Constraints and Integrity
 
@@ -192,9 +182,9 @@ Were the constraints under or over restrictive?
 -  `procedure_occurrence.modifier_concept_id`
 - The `<something>_source_concept_id` might be useful for when the data contributor already has mapped their source value to an existing ontology term, but they may not have this information.
 
-**Columns that need to be free text instead of varchar to accommodate source data**
+**Columns that need to be free blobs instead of varchar to accommodate source data**
 - All `<something>_source_value` columns
-- Some source value columns had to be truncated because the value was longer than the max char length.
+- Some source value columns had to be truncated because the value was longer than the max length.
 
 ### Naming Conventions and Consistency (Table and Column)
 Common table attributes should be named uniformly and without a table name prefix.
@@ -213,29 +203,21 @@ Why isn't the model **consistent with the use of source_concept_id**? Shouldn't 
 
 # FHIR
 
-### Still Needs Further Exploration
-So far we've just read the FHIR spec and browsed various company/org's FHIR tooling. We need to evaluate FHIR the same way we evaluated OMOP. Spin up a FHIR database and try ingesting an example dataset like CBTTC.
-
+### May Need Further Exploration
+So far we've just studied the FHIR spec and browsed various FHIR tooling.
 
 ### FHIR is a LOT of things - more than a data model or API specification
 Employs verbosity rather than generality. (Also the documentation is 80% filler, but we can give that a pass.)
 
 -   Used less as a standalone data model and more as a way to interchange data from existing EHR systems
-
 -   Includes a defined information model of the medical world
-
 -   Defines a specification for extending the model
-
 -   Defines a specification for adding constraints to the model
-
 	-   Specify required attributes of Resources AND how Resources relate (foreign keys).
-
 -   Defines a very detailed specification for creating, updating, deleting, and finding FHIR entities (or Resources) via RESTful web services
-
 -   Defines a specification for a RESTful query language - allows more advanced querying to search for FHIR Resources    
-	-   Example query: Patient that is Asian or White and Female and is at least 30 years old with more than one 		DiagnosisReport
+	-   Example query: Patient that is Asian or White and Female and is at least 30 years old with more than one DiagnosisReport
 	-  Good because defining the syntax and grammar for a RESTful query language is hard and not a standardized thing
-
 
 ### Defines resources for more things and more details than OMOP (outside of splinter groups)
 
@@ -259,22 +241,12 @@ See e.g.
 
 #### SMART on FHIR
 
--   Primarily geared towards helping people build apps that access existing “SMART on FHIR” backends.
-
--   Tough to tell what a “SMART on FHIR” backend is vs just a REST API that implements the FHIR specification
-
--   Aims to get people to build apps within their ecosystem and provide a “marketplace” of apps  
--   Does not seem to focus on building your own FHIR data and REST API
+- Primarily geared towards helping people build apps that access existing backends.
+- Tough to tell what a “SMART on FHIR” backend is vs just a REST API that implements the FHIR specification
+- Aims to get people to build apps within their ecosystem and provide a “marketplace” of apps  
+- Does not seem to focus on building your own FHIR data and REST API
 
 #### FHIRbase
+
 -   Provides a set of tools to easily create your own database with the FHIR database model and interact with the FHIR data via a SQL  data access layer  
 -   Significantly lowers the barrier to entry for standing up a FHIR database - great documentation and tutorials along with docker images to get up and running quickly
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5ODE0ODc3MzcsMTM0NTk5NTI1OSw1MT
-MyMjQwMDgsLTExNjY5NTg4OTEsLTk0OTAzMDI0OSwtNTY2MDI5
-NjQxLC0yMDMzMTkwMTkxLDEwOTk0Mzc4NywxNjI0OTQxNzkzLC
-03MjI3MjM5MjEsLTE1MDA2NTk0NjUsLTQzNzMzMDY1MiwtMTk5
-MDI0MTAxMSwxMjk1OTM5MDIxLC0xMDc2ODE0NDk5LC0xMjgzMz
-EwMzg3LC00MjIyNzU5MDYsMTMyMzQyMDY4MCwxOTIzMTAwNzIw
-LC03MjY1NDkzODddfQ==
--->
