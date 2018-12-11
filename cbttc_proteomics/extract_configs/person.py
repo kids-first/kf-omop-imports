@@ -8,6 +8,7 @@ from kf_lib_data_ingest.etl.extract.operations import (
 from kf_lib_data_ingest.common import constants as kf_constants
 from common import constants as omop_constants
 from common.concept_schema import OMOP
+from common.athena import athena_cache
 
 source_data_url = (
     'file://~/Projects/kids_first/data/CBTTC/proteomics/cbttc-proteomics.xlsx'
@@ -19,38 +20,27 @@ source_data_loading_parameters = {
 }
 
 
-def gender_map(x):
-    m = {
-        "Female": omop_constants.CONCEPT.GENDER.FEMALE,
-        "Male": omop_constants.CONCEPT.GENDER.MALE,
-        "default": omop_constants.CONCEPT.GENDER.UNKNOWN
-    }
-    return m.get(x, m.get('default'))
-
-
 def ethnicity_map(x):
-    m = {
-        "Not Hispanic or Latino": omop_constants.CONCEPT.ETHNICITY.HISPANIC,
-        "Hispanic or Latino": omop_constants.CONCEPT.ETHNICITY.NOT_HISPANIC,
-        "default": omop_constants.CONCEPT.ETHNICITY.UNKNOWN
-    }
-    return m.get(x, m.get('default'))
+    value = x.lower()
+    if x.startswith('unavailable'):
+        value = omop_constants.CONCEPT.COMMON.UNAVAILABLE
+    else:
+        value = athena_cache.lookup(x, query_params={
+            'standardConcept': 'Standard',
+            'domain': 'Ethnicity'
+        })
+    return value
 
 
 def race_map(x):
-    value = x
-    if x.startswith('White'):
-        value = omop_constants.CONCEPT.RACE.WHITE
-    elif x.startswith('Black'):
-        value = omop_constants.CONCEPT.RACE.AFRICAN
-    elif x.startswith('Asian'):
-        value = omop_constants.CONCEPT.RACE.ASIAN
-    elif x.startswith('Native'):
-        value = omop_constants.CONCEPT.RACE.PACIFIC_ISLANDER,
-    elif x.startswith('American'):
-        value = omop_constants.CONCEPT.RACE.AMERICAN_INDIAN,
-    else:
+    value = x.lower()
+    if x.startswith('other'):
         value = omop_constants.CONCEPT.RACE.UNKNOWN
+    else:
+        value = athena_cache.lookup(x, query_params={
+            'standardConcept': 'Standard',
+            'domain': 'Race'
+        })
 
     return value
 
@@ -74,12 +64,15 @@ operations = [
     # gender concept id
     value_map(
         in_col="gender",
-        m=lambda x: gender_map(x),
+        m=lambda x: athena_cache.lookup(x.lower(), query_params={
+            'standardConcept': 'Standard',
+            'domain': 'Gender'
+        }),
         out_col=OMOP.GENDER.CONCEPT_ID
     ),
     # gender source concept id (why??)
     constant_map(
-        m=omop_constants.CONCEPT.COMMON.NO_MATCH,
+        m=omop_constants.CONCEPT.COMMON.UNAVAILABLE,
         out_col=OMOP.GENDER.SOURCE_CONCEPT_ID
     ),
     # ethnicity source value
@@ -95,7 +88,7 @@ operations = [
     ),
     # ethnicity source concept id (why??)
     constant_map(
-        m=omop_constants.CONCEPT.COMMON.NO_MATCH,
+        m=omop_constants.CONCEPT.COMMON.UNAVAILABLE,
         out_col=OMOP.ETHNICITY.SOURCE_CONCEPT_ID
     ),
     # race source value

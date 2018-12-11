@@ -409,7 +409,7 @@ schema = {
         "gender_source_value": OMOP.GENDER.SOURCE_VALUE,
         "month_of_birth": None,
         "person_source_value": OMOP.PERSON.SOURCE_VALUE,
-        "race_source_value": None,
+        "race_source_value": OMOP.RACE.SOURCE_VALUE,
         "year_of_birth": OMOP.MEASUREMENT.YEAR_OF_BIRTH
     },
     "ProcedureOccurrence": {
